@@ -1,10 +1,10 @@
 using System;
-
+//second exercise in C#
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("What is you grade percentage? ");
+        Console.Write("What is your grade percentage? ");
         string gradepercentage = Console.ReadLine();
         int grade = int.Parse(gradepercentage);
 

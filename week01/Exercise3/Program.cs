@@ -1,5 +1,5 @@
 using System;
-
+//third exercise in C#
 class Program
 {
     static void Main(string[] args)
