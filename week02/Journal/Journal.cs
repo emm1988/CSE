@@ -2,6 +2,96 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+public class Journal
+{
+    public List<Entry> _entries = new List<Entry>();
+
+    public void AddEntry(Entry newEntry)
+    {
+        _entries.Add(newEntry);
+        string filename = Console.ReadLine();
+    }
+
+    public void DisplayAll()
+    {
+        if (_entries.Count == 0)
+        {
+            Console.WriteLine("No entries found.");
+            return;
+        }
+
+        foreach (var entry in _entries)
+        {
+            entry.Display();
+            Console.WriteLine();
+        }
+    }
+
+    public void SaveToFile(string filename)
+    {
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            foreach (var entry in _entries)
+            {
+                writer.WriteLine($"{entry._prompt}|{entry._entry}");
+            }
+        }
+    }
+    
+    public void LoadFromFile(string file)
+    {
+        if (File.Exists(file))
+        {
+            _entries.Clear();
+            string[] lines = File.ReadAllLines(file);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split('|');
+                if (parts.Length == 2)
+                {
+                    Entry entry = new Entry(parts[0], parts[1]);
+                    _entries.Add(entry);
+                }
+            }
+            Console.WriteLine("File loaded successfully.");
+        }
+        else
+        {
+            Console.WriteLine("File does not exist.");
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+using System.Collections.Generic;
+using System.IO;
+
 
 public class Journal
 {
@@ -76,3 +166,4 @@ public class Journal
         Console.WriteLine($"Entries loaded from {file}");
     }
 }
+*/
